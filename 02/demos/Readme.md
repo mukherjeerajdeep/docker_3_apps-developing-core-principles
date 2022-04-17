@@ -12,36 +12,38 @@ using a bind mount from the host.
 
    Commands you can use:
 
+```text
    find . -maxdepth 2 -type d -exec ls -l "{}" \;
    tree -L 3                                          # if tree is installed
    exa -lTL 3                                         # if exa is installed
    cat package.json
+```
 
 ## Create a Dockerfile
 
 1. Find a suitable base image to serve a Node.js app (e.g. hub.docker.com)
 
-   Use the FROM Dockerfile instruction to define the base image.
+   Use the `FROM` Dockerfile instruction to define the base image.
 
 2. Install app's dependencies into image
 
-   Use the COPY instruction to copy files that govern app's dependencies into
-   the image. Use the RUN instruction to execute dependency installation using
-   Yarn.
+   Use the `COPY` instruction to copy files that govern app's dependencies into
+   the image. Use the `RUN` instruction to execute dependency installation using
+   `Yarn`.
 
 3. Copy source code into image
 
-   Use the COPY instruction to copy the source code into the image.
+   Use the `COPY` instruction to copy the source code into the image.
 
 4. Define what gets executed by the container
 
-   Use a combination of the ENTRYPOINT and CMD instructions to define what a
+   Use a combination of the `ENTRYPOINT` and `CMD` instructions to define what a
    derived container will execute. Pay attention to the scripts defined in the
-   package.json file.
+   `package.json` file.
 
 ## Build an image from the Dockerfile
 
-   Use the 'docker build' command to build the image, and tag the image with an
+   Use the '`docker build`' command to build the image, and tag the image with an
    appropriate name.
 
 ## Test the app
@@ -59,9 +61,9 @@ using a bind mount from the host.
 
 ## Edit source code in a container
 
-1. Run a new container, and bind mount the app's source code into the container
-   ('spec' and 'src' directories). Be sure to expose the app's port so that it
-   can be tested. Run the 'dev' script rather than the 'prod' script.
+1. Run a new container, and `bind mount` the app's source code into the container
+   ('`spec`' and '`src`' directories). Be sure to expose the app's port so that it
+   can be tested. Run the '`dev`' script rather than the '`prod`' script.
 
 2. Use the app
 
@@ -71,7 +73,7 @@ using a bind mount from the host.
 3. Edit the source code
 
    In a text editor of your choice, change the 'placeholder' string in the
-   'src/static/js/app.js' file to something other than 'New Item'. Watch for
+   `'src/static/js/app.js'` file to something other than `'New Item'`. Watch for
    the change to be picked up by 'nodemon'.
 
 4. Check the app change

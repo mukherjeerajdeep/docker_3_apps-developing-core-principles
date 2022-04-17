@@ -12,13 +12,15 @@ Docker images for applications that require a compilation step.
 
    Commands you can use:
 
+```text
    cat README.md
    cat mini.go
    cat Dockerfile
+```
 
 ## Build an image from the Dockerfile
 
-1. Use the 'docker build' command to build the image, and tag the image with an
+1. Use the `'docker build'` command to build the image, and tag the image with an
    appropriate name.
 
 2. Check and make a note of the image size using the 'docker images' command.
@@ -33,21 +35,21 @@ Docker images for applications that require a compilation step.
 ## Create a Builder Dockerfile
 
 1. Make a copy of the Dockerfile to use as a starting point for authoring an
-   image for building the 'mini' binary. Call it 'Dockerfile.build'.
+   image for building the 'mini' binary. Call it `'Dockerfile.build'`.
 
 2. A container that is derived from the image that will be built from your new
-   Dockerfile, will have the source code for the app bind mounted inside it.
+   `Dockerfile`, will have the source code for the app bind mounted inside it.
    Alter the Dockerfile to copy just what is needed from the build context to
    deal with the apps dependencies.
 
-3. Redefine the ENTRYPOINT instruction to build the binary from the retrieved
+3. Redefine the `ENTRYPOINT` instruction to build the binary from the retrieved
    dependencies and mounted source code.
 
 ## Build an Image from the Builder Dockerfile
 
-   Use the 'docker build' command to build the image, and tag the image with an
-   appropriate name (maybe 'mini-builder'). Don't forget to use the '-f' flag
-   because the Dockerfile is called 'Dockerfile.build'.
+   Use the `'docker build'` command to build the image, and tag the image with an
+   appropriate name (maybe 'mini-builder'). Don't forget to use the `'-f'` flag
+   because the Dockerfile is called `'Dockerfile.build'`.
 
 ## Test the Builder Image
 
