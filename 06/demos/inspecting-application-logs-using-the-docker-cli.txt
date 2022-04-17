@@ -1,0 +1,86 @@
+# Inspecting Application Logs Using the Docker CLI
+
+This exercise demonstrates how to use Docker's logging capabilities to gain
+insight into a containerized application's status.
+
+## Assumptions
+
+1. A Docker client is installed locally, that is configured to communicate
+   with a local or remote Docker daemon
+
+## Become familiar with app
+
+   Commands you can use:
+
+   find . -maxdepth 2 -type d -exec ls -l "{}" \;
+   tree -L 3                                          # if tree is installed
+   exa -lTL 3                                         # if exa is installed
+   cat package.json
+
+## Change the default logging driver
+
+1. Check the current default logging driver
+
+   Use the 'docker info' command to determine which logging driver the Docker
+   engine is configured to use.
+
+2. Change the default logging driver to 'local'
+
+   If on Linux, edit the '/etc/docker/daemon.json' file to add an entry for the
+   logging driver, and set the driver to 'local'. The key should be
+   "log-driver", and the value "local". If you're using Docker Desktop for
+   {Windows|macOS}, make the change in the settings.
+
+3. Restart the Docker daemon
+
+   If on Linux, use the 'systemctl' command to restart the Docker service. If
+   you're using Docker for Desktop, the daemon can be restarted in the
+   settings.
+
+4. Check the default logging driver
+
+   Use the 'docker info' command to determine which logging driver the Docker
+   engine is now configured to use. It should now be 'local'.
+
+## Run a container
+
+1. Build an image for the app
+
+   The app's source code has changed to produce some example log messages. So,
+   a new image needs to be built for the app. Tag it with a suitable name.
+
+2. Start the app
+
+   Run a container based on the image that you just built. Run it in detached
+   mode (background), and don't forget to make its port available to consume on
+   the host.
+
+## Use the Docker CLI to view the logs
+
+1. Generate log messages
+
+   Use the provided 'todo.sh' script and data file 'todos.txt' to interact with
+   the app running in the container. Run it in the background so that it
+   doesn't block your terminal.
+
+2. Display the logs messages received in the last 5m
+
+   Make sure a suitable amount of time has elapsed since starting the 'todo.sh'
+   script, and then use the 'docker logs' command with a suitable flag to get
+   all the logs received during the last 5 minutes.
+
+3. Display all logs messages received up to 5m ago
+
+   Make sure a suitable amount of time has elapsed since starting the 'todo.sh'
+   script, and then use the 'docker logs' command with a suitable flag to get
+   all the logs received up until 5 minutes ago.
+
+4. Follow the logs
+
+   Use the docker logs command with appropriate flags to enable you to follow
+   the logs, as well as have a timesatmp added to the log messages.
+
+Nice one! You've been able to use Docker to view the logs of a containerized
+application. If you're comfortable with the changes that are required, you
+could repeat the exercise and try an alternative logging driver for the
+container.

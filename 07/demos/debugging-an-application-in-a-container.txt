@@ -1,0 +1,91 @@
+# Debugging an Application in a Container
+
+This exercise demonstrates how to use Visual Studio Code to debug a
+containerized application.
+
+## Assumptions
+
+1. A Docker client is installed locally, that is configured to communicate
+   with a local or remote Docker daemon
+
+2. Visual Studio Code is installed locally.
+
+## Become familiar with app
+
+   Commands you can use:
+
+   find . -maxdepth 2 -type d -exec ls -l "{}" \;
+   tree -L 3                                          # if tree is installed
+   exa -lTL 3                                         # if exa is installed
+   cat package.json
+
+## Install the Docker extension
+
+1. Click on the extensions icon in the left-hand panel
+
+2. Use the 'docker' keyword to search for the correct extension
+
+3. For Microsoft's published extension, hit the install button
+
+4. Click on the new Docker icon in the left-hand panel and see what the
+   extension provides
+
+## Prepare VS Code for debugging
+
+1. Open the app's folder
+
+2. Alter the 'package.json' file
+
+   Add the '--inspect' flag for the 'nodemon' command, with a value that
+   specifies listening on all interfaces on port 9229. Save the file.
+
+3. Change the name of the Dockerfile
+
+   VS Code will add a Dockerfile, and to avoid it complaining about the
+   existing Dockerfile, rename it to 'Dockerfile.bak'.
+
+4. Add Docker files to workspace
+
+   Open the command palette, and execute the 'Docker: Add Docker Files to
+   Workspace...' command. Select 'Node.js', port '3000', and decline the
+   invitation to add a Docker Compose file. Notice the addition of a new,
+   added Dockerfile. Don't get attached to this Dockerfile ... just remove it.
+
+5. Reinstate the Dockerfile
+
+   Change the name of Dockerfile.bak back to Dockerfile.
+
+6. Amend the 'launch.json' file
+
+   Add a directive to the 'launch.json' file to specify that the root for
+   Node.js in the container is '/app' (use intellisense CTRL <SPACE> to get
+   hints).
+
+7. Amend the 'tasks.json' file
+
+   Add a 'tag' for the image in the 'docker-build' task, and a 'buildArgs'
+   definition to specify the 'NODE_ENV' variable with a value 'development'
+   (use intellisense CTRL <SPACE> to get hints). Add a 'volumes' definition to
+   the 'docker-run: debug' task so that the app's source code is bind mounted
+   into the container. Also add a 'ports' definition to map the container's
+   port 3000 to the same port number on the host.
+
+## Debug the app
+
+1. Set a breakpoint
+
+   Find a suitable point in the code to set a breakpoint. Set the breakpoint by
+   clicking on the left-hand side of the editor window for the file.
+
+2. Start the debugger
+
+   Click on the debugger icon in the left-hand panel. Then click on the launch
+   configuration at the top of the debugger pane to start debugging. Notice VS
+   Code building the image and then starting the container with all of the
+   necessary flags. Interact with the app in a browser, and play with the
+   debugger.
+
+Great stuff! You've set up an IDE (of sorts) to debug an application that is
+containerized. If you're language of choice is Go, Java, Python or something
+else, try out a relevant extension to debug an app written in your chosen
+language.
