@@ -56,12 +56,12 @@ Docker images for applications that require a compilation step.
 1. Compile the app
 
    Compile the app using a Builder container derived from the builder image.
-   Don't forget to bind mount the the source code into the container at the
-   correct location.
+   **Don't forget to bind mount the the source code into the container at the
+   correct location**.
 
 2. Check the results
 
-   On the host, make sure that the 'mini' binary is located in the directory
+   On the host, make sure that the '`mini`' binary is located in the directory
    that was bind mounted into the container. If it's there, you succeeded!
 
 ## Create a Dockerfile for the App
@@ -69,12 +69,12 @@ Docker images for applications that require a compilation step.
    Either create a new Dockerfile (or alter the original Dockerfile), whose
    purpose is just to serve 'micro'. Choose a suitable (small) base image, and
    be sure to copy the binary created by the builder container into the image
-   from the build context. The ENTRYPOINT instruction should specify the path
+   from the build context. The `ENTRYPOINT` instruction should specify the path
    to the binary.
 
 ## Build an Image from the Dockerfile
 
-   Use the 'docker build' command to build the image, and tag the image with an
+   Use the '`docker build`' command to build the image, and tag the image with an
    appropriate name.
 
 ## Test the Image

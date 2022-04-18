@@ -30,17 +30,21 @@ can be defined to serve different purposes.
    context.
 
    Commands you can use:
-
+```text
    ls -lR   
    cat README.md
    cat mini.go
    cat Dockerfile
+```
 
 ## Build a linter image from the Dockerfile
 
 1. Use the 'docker build' command to build the image, using the 'lint' stage
    from the Dockerfile (HINT. use the --target flag). Tag the image with an
    appropriate name. 
+
+      1. Build the image : `docker build -t mini-linter:1.0 --target lint .`
+      2. Run the linter : `docker run --rm -it -v ${PWD}:/app mini-linter:1.0` with bind-mounting the `/app` folder in the `build-context` i.e. the local file sytem `*.go` files. 
 
 2. In the build output, notice how BuildKit has restricted the steps it has
    processed to just those relevant to the 'lint' stage.
